@@ -1,5 +1,6 @@
-const tratarErro = (error, request, response, next) => {
-    console.error(error.message);
+const lidarErro = (error, request, response, next) => {
+    console.error('Nome erro:', error.name);
+    console.error('Mensagem erro:', error.message);
 
     if (error) {
         return response.status(400).json({error: error.message})
@@ -13,6 +14,6 @@ const endpointDesconhecido = (request, response) => {
 }
 
 module.exports = {
-    tratarErro,
+    lidarErro,
     endpointDesconhecido
 }
