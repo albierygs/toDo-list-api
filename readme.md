@@ -14,7 +14,10 @@ Este projeto é uma API para uma lista de tarefas, permitindo a criação, leitu
 
 - `GET /user` - Obtém o usuário de acordo com o token fornecido.
 - `GET /user/:id` - Obtém um usuário a partir do seu id.
-- `POST /users` - Cria um novo usuário.
+- `POST /user` - Cria um novo usuário.
+- `PUT /user/:id` - Atualiza um usuário a partir do seu id.
+- `DELETE /user/:id` - Exclui um usuário a partir do seu id.
+- `POST /login` - Realiza o login do usuário.
 
 ## Configuração
 

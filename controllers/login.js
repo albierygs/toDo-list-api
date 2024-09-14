@@ -8,6 +8,10 @@ const loginRouter = require('express').Router()
 loginRouter.post('/', async (request, response) => {
     const { email, password } = request.body
 
+    if (!(email && password)) {
+        return response.status(400).send({ error: 'Email ou senha estão faltando' })
+    }
+
     const user = await User.findOne({ email })
 
     if (!user) {
