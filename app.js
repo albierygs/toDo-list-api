@@ -13,9 +13,7 @@ const app = express()
 
 conectarBanco()
 
-app.use(cors({
-    origin: URL_FRONT
-}))
+app.use(cors())
 app.use(express.json())
 
 app.use('/users', usersRouter)
