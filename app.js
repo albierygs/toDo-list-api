@@ -1,7 +1,9 @@
 const express = require('express')
+const cors = require('cors');
 require('express-async-errors')
 const conectarBanco = require('./utils/conexaoBD');
 const middleware = require('./utils/middleware');
+const { URL_FRONT } = require('./utils/config')
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const userRouter = require('./controllers/user');
@@ -11,6 +13,9 @@ const app = express()
 
 conectarBanco()
 
+app.use(cors({
+    origin: URL_FRONT
+}))
 app.use(express.json())
 
 app.use('/users', usersRouter)
