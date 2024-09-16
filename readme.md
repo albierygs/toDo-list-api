@@ -25,4 +25,14 @@ Este projeto é uma API para uma lista de tarefas, permitindo a criação, leitu
    ```bash
    git clone https://github.com/albierygs/toDo-list-api.git
 
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd toDo-list-api
 
+3. Instale as dependências:
+   ```bash
+   npm install
+
+4. Inicie o servidor:
+   ```bash
+   npm start
