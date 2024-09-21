@@ -9,4 +9,12 @@ const conectar = async () => {
     console.log('Conectado ao banco');
 }
 
-module.exports = conectar
+const fechar = async () => {
+    console.log('Encerrando a aplicação...');
+    await mongoose.connection.close();
+    console.log('Conexão com o banco fechada.');
+    process.exit(0);
+}
+    
+
+module.exports = { conectar, fechar }
