@@ -1,22 +1,27 @@
 const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs');
-const { SECRET } = require('../utils/config');
 const userRouter = require('express').Router()
 const { extrairToken, extrairUser } = require('../utils/middleware')
 
 
 // Não sei se vai usar
 // Encontra usuário pelo id
-userRouter.get('/:id', async (request, response) => {
-    const id = request.params.id
+// userRouter.get('/:id', extrairToken, async (request, response) => {
+//     const id = request.params.id
+//     const tokenId = request.token.id
 
-    if (!user) {
-        return response.status(400).send({ error: 'Usuário não encontrado' })
-    }
+//     if (id != tokenId) {
+//         return response.status(401).send({ error: 'Não autorizado' })
+//     }
 
-    response.status(200).json(user)
-})
+//     const user = await User.findById(id)
+
+//     if (!user) {
+//         return response.status(400).send({ error: 'Usuário não encontrado' })
+//     }
+
+//     response.status(200).json(user)
+// })
 
 // Encontra usuário com token
 userRouter.get('/', extrairToken, extrairUser, async (request, response) => {
