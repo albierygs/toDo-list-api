@@ -21,7 +21,7 @@ app.use('/', inicioRouter)
 app.use('/users', usersRouter)// apagar depois
 app.use('/user', userRouter)
 app.use('/login', loginRouter)
-app.use('/task', taskRouter)
+app.use('/tasks', taskRouter)
 
 app.use(middleware.endpointDesconhecido)
 app.use(middleware.lidarErro)
