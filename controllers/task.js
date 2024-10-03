@@ -32,16 +32,21 @@ taskRouter.get('/:id', extrairToken, extrairUser, async (request, response) => {
 
 // Criar tarefa com o token do usuário
 taskRouter.post('/', extrairToken, extrairUser, async (request, response) => {
-    const { name, date, description, done } = request.body
+    const { name, date, description, done, important, userID } = request.body
 
     const user = request.user
+
+    if (userID !== user.id) {
+        return response.status(401).send({ error: 'Token e userID diferentes' })
+    }
 
     const task = new Task({
         name,
         date,
         description,
         done,
-        user: user.id
+        important,
+        userID: user.id
     })
 
     const taskSalva = await task.save()
@@ -56,7 +61,7 @@ taskRouter.post('/', extrairToken, extrairUser, async (request, response) => {
 taskRouter.put('/:id', extrairToken, extrairUser, async (request, response) => {
 
     const id = request.params.id
-    const { name, date, description, done } = request.body
+    const { name, date, description, done, important } = request.body
     const user = request.user
 
     if (!(user.tasks.includes(id))) {
@@ -65,7 +70,7 @@ taskRouter.put('/:id', extrairToken, extrairUser, async (request, response) => {
 
     const taskAtualizada = await Task.findByIdAndUpdate(
         id,
-        { name, description, date, done },
+        { name, description, date, done, important },
         { new: true, runValidators: true, context: 'query' }
     )
 

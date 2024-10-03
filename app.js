@@ -6,7 +6,6 @@ const middleware = require('./utils/middleware');
 const { URL_FRONT } = require('./utils/config')
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
-const userRouter = require('./controllers/user');
 const inicioRouter = require('./controllers/inicio');
 const taskRouter = require('./controllers/task');
 
@@ -18,8 +17,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/', inicioRouter)
-app.use('/users', usersRouter)// apagar depois
-app.use('/user', userRouter)
+app.use('/users', usersRouter)
 app.use('/login', loginRouter)
 app.use('/tasks', taskRouter)
 

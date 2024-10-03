@@ -17,9 +17,14 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    user: {
+    important: {
+        type: Boolean,
+        default: false
+    },
+    userID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        reqiored: [ true, "userId é requerido" ]
     }
 })
 
