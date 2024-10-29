@@ -11,7 +11,8 @@ const taskSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: false
+    required: false,
+    default: new date()
   },
   done: {
     type: Boolean,
@@ -24,7 +25,7 @@ const taskSchema = new mongoose.Schema({
   userID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    reqiored: [ true, "userId é requerido" ]
+    required: [ true, "userId é requerido" ]
   }
 })
 

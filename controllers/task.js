@@ -32,13 +32,9 @@ taskRouter.get('/:id', extrairToken, extrairUser, async (request, response) => {
 
 // Criar tarefa com o token do usuário
 taskRouter.post('/', extrairToken, extrairUser, async (request, response) => {
-  const { name, date, description, done, important, userID } = request.body
+  const { name, date, description, done, important } = request.body
   
   const user = request.user
-  
-  if (userID !== user.id) {
-    return response.status(401).send({ error: 'Token e userID diferentes' })
-  }
   
   const task = new Task({
     name,
