@@ -6,7 +6,7 @@ const { extrairToken, extrairUser } = require('../utils/middleware')
 taskRouter.get('/', extrairToken, async (request, response) => {
   const tokenId = request.token.id
   
-  const tasks = await Task.find({ user: tokenId })
+  const tasks = await Task.find({ userID: tokenId })
   
   response.status(200).json(tasks)
 })
