@@ -4,30 +4,11 @@ const { extrairToken, extrairUser } = require('../utils/middleware')
 
 // Encontrar tarefas de um usuário com token dele
 taskRouter.get('/', extrairToken, async (request, response) => {
-  const tokenId = request.token.id
+  const tokenId = request.decodedToken.id
   
   const tasks = await Task.find({ userID: tokenId })
   
   response.status(200).json(tasks)
-})
-
-// Não sei se vai usar!!!!
-// Encontrar tarefa específica pelo id e com o token do usuário
-taskRouter.get('/:id', extrairToken, extrairUser, async (request, response) => {
-  const id = request.params.id
-  const user = request.user
-  
-  if (!(user.tasks.includes(id))) {
-    return response.status(401).send({ error: 'Não autorizado' })
-  }
-  
-  const task = await Task.findById(id)
-  
-  if (!task) {
-    return response.status(400).send({ error: 'Tarefa não encontrada' })
-  }
-  
-  response.status(200).json(task)
 })
 
 // Criar tarefa com o token do usuário

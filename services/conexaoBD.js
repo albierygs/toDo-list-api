@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('./config')
+const config = require('../utils/config')
 
 const conectar = async () => {
   mongoose.set('strictQuery', false)

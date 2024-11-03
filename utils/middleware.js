@@ -30,13 +30,14 @@ const extrairToken = (request, response, next) => {
     return response.status(401).json({ error: "token inválido" })
   }
   
-  request.token = decodedToken
+  request.decodedToken = decodedToken
+  request.token = token
   
   next()
 }
 
 const extrairUser = async (request, response, next) => {
-  const user = await User.findById(request.token.id)
+  const user = await User.findById(request.decodedToken.id)
   request.user = user
   
   next()

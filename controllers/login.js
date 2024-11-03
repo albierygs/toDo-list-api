@@ -1,7 +1,8 @@
 const User = require('../models/user')
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { SECRET } = require('../utils/config')
+const { SECRET } = require('../utils/config');
+const { generateToken } = require('../utils/routesHelper');
 const loginRouter = require('express').Router()
 
 
@@ -24,12 +25,7 @@ loginRouter.post('/', async (request, response) => {
     return response.status(401).send({ error: 'senha inválida' })
   }
   
-  const userForToken = { id: user.id }
-  
-  const token = await jwt.sign(
-    userForToken,
-    SECRET
-  )
+  const token = generateToken(user)
   
   response.status(200).json({ token })
 })

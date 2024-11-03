@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
     minLength: [ 6, 'password deve ter no mínimo 6 caracteres' ],
     required: [ true, 'password é requerida' ] 
   },
+  resetPasswordToken: {
+    type: String,
+    default: null
+  },
+  resetPasswordExpires: {
+    type: Date,
+    default: null
+  },
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,

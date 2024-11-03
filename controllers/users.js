@@ -4,25 +4,6 @@ const usersRouter = require('express').Router()
 const { extrairToken, extrairUser } = require('../utils/middleware')
 
 
-// Não sei se vai usar
-// Encontra usuário pelo id
-// usersRouter.get('/:id', extrairToken, async (request, response) => {
-  //     const id = request.params.id
-//     const tokenId = request.token.id
-
-//     if (id != tokenId) {
-//         return response.status(401).send({ error: 'Não autorizado' })
-//     }
-
-//     const user = await User.findById(id)
-
-//     if (!user) {
-//         return response.status(400).send({ error: 'Usuário não encontrado' })
-//     }
-
-//     response.status(200).json(user)
-// })
-
 // Encontra usuário com token
 usersRouter.get('/', extrairToken, extrairUser, async (request, response) => {
   const user = request.user
@@ -48,7 +29,7 @@ usersRouter.post('/', async (request, response) => {
 usersRouter.put('/:id', extrairToken, async (request, response) => {
   const id = request.params.id
   const { email, name, password } = request.body
-  const tokenId = request.token.id
+  const tokenId = request.decodedToken.id
   
   if (id != tokenId) {
     return response.status(401).send({ error: 'Não autorizado' })
@@ -80,7 +61,7 @@ usersRouter.put('/:id', extrairToken, async (request, response) => {
 // Deleta usuário com token 
 usersRouter.delete('/:id', extrairToken, async (request, response) => {
   const id = request.params.id
-  const tokenId = request.token.id
+  const tokenId = request.decodedToken.id
   
   if (id != tokenId) {
     return response.status(401).send({ error: 'Não autorizado' })

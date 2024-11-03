@@ -1,6 +1,6 @@
 const app = require('./app');
 const { PORT } = require('./utils/config');
-const fecharConexao = require('./utils/conexaoBD').fechar
+const fecharConexao = require('./services/conexaoBD').fechar
 
 app.listen(PORT, async () => {
   console.log(`Servidor rodando na porta ${PORT}`);
