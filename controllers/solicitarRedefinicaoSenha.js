@@ -11,7 +11,7 @@ solicitarRouter.post('/', async (request, response) => {
   const user = await User.findOne({ email })
 
   if (!user) {
-    return res.status(404).json({ error: 'E-mail não encontrado' });
+    return response.status(404).json({ error: 'E-mail não encontrado' });
   }
 
   const resetToken = generateToken(user, '1h')
