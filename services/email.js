@@ -19,7 +19,7 @@ const sendEMail = async (email, htmlmessage, title) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log('Erro ao enviar o e-mail: ', error);
+      return new Error('Erro ao enviar o email')
     }
     console.log(`E-mail enviado para ${email}: ` + info.response);
   })
