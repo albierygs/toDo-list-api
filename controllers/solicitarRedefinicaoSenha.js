@@ -6,9 +6,11 @@ const { generateToken } = require('../utils/routesHelper')
 const solicitarRouter = require('express').Router()
 
 solicitarRouter.post('/', async (request, response) => {
-  const { email } = request.body
+  const { email, userId } = request.body
 
-  const user = await User.findOne({ email })
+  const user = email 
+    ? await User.findOne({ email })
+    : await User.findById(userId)
 
   if (!user) {
     return response.status(404).json({ error: 'E-mail não encontrado' });
