@@ -73,8 +73,11 @@ taskRouter.delete('/:id', extrairToken, extrairUser, async (request, response) =
   if (!taskDeletada) {
     return response.status(400).send({ error: 'Tarefa não encontrada' })
   }
+
+  user.tasks = user.tasks.filter(t => t.toString() !== id)
+  await user.save()
   
-  response.json(204).end()
+  response.status(204).end()
 })
 
 module.exports = taskRouter
