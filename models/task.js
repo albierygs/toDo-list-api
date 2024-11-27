@@ -9,7 +9,7 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  date: {
+  dateTime: {
     type: Date,
     required: false,
     default: new Date()
@@ -22,10 +22,32 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  location: {
+    name: {
+      type: String,
+      required: false,
+      default: null
+    },
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: false,
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number],
+      required: false,
+      default: null
+    }
+  },
   userID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [ true, "userId é requerido" ]
+  },
+  createdAt: {
+    type: Date,
+    default: new Date()
   }
 })
 

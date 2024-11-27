@@ -13,16 +13,17 @@ taskRouter.get('/', extrairToken, async (request, response) => {
 
 // Criar tarefa com o token do usuário
 taskRouter.post('/', extrairToken, extrairUser, async (request, response) => {
-  const { name, date, description, done, important } = request.body
+  const { name, dateTime, description, done, important, location } = request.body
   
   const user = request.user
   
   const task = new Task({
     name,
-    date,
+    dateTime,
     description,
     done,
     important,
+    location,
     userID: user.id
   })
   
@@ -38,7 +39,7 @@ taskRouter.post('/', extrairToken, extrairUser, async (request, response) => {
 taskRouter.put('/:id', extrairToken, extrairUser, async (request, response) => {
   
   const id = request.params.id
-  const { name, date, description, done, important } = request.body
+  const { name, dateTime, description, done, important, location } = request.body
   const user = request.user
   
   if (!(user.tasks.includes(id))) {
@@ -47,7 +48,7 @@ taskRouter.put('/:id', extrairToken, extrairUser, async (request, response) => {
   
   const taskAtualizada = await Task.findByIdAndUpdate(
     id,
-    { name, description, date, done, important },
+    { name, description, dateTime, done, important, location },
     { new: true, runValidators: true, context: 'query' }
   )
   
